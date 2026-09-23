@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ede0">
+  <meta name="format-detection" content="telephone=no">
+  <title>文渊阁 DocBase · 典籍文件管理器</title>
+  <meta name="description" content="文渊阁 DocBase —— 一器纳百籍。多格式文件统一管理、内置解释器直运行脚本、SSH 直连 MySQL 数据库。">
+
+  <!-- 字体：展示字用「霞鹜文楷」+ 正文「思源宋体」，古雅有骨 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="paper-field"></div>
+  <div class="halo"></div>
+
+  <!-- ===== 顶栏 ===== -->
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a href="#" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="#volume">功能</a>
+        <a href="#terminal">运行</a>
+        <a href="portable.html">便携版</a>
+        <a href="#acquire">下载</a>
+        <a href="journal.html">更新手记</a>
+        <a href="feedback.html">反馈</a>
+      </nav>
+      <a href="#acquire" class="btn btn-seal nav-cta">免费下载</a>
+      <button class="burger" id="burger" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="mnav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== 手机端抽屉导航 ===== -->
+  <div class="mnav-mask" id="mnavMask"></div>
+  <nav class="mnav" id="mnav" aria-label="手机端导航">
+    <a href="#volume">功能</a>
+    <a href="#terminal">运行</a>
+    <a href="portable.html">便携版</a>
+    <a href="#acquire">下载</a>
+    <a href="journal.html">更新手记</a>
+    <a href="feedback.html">反馈</a>
+    <a href="#acquire" class="btn btn-seal">免费下载</a>
+  </nav>
+
+  <main>
+    <!-- ===== 首屏 ===== -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="vsign">载籍极博 · 一器纳之</div>
+            <span class="kicker rv">Windows 桌面应用 · 建立于二〇二六</span>
+            <h1 class="hero-title rv">
+              一器纳<span class="mark">百籍</span><br>
+              行文即得
+            </h1>
+            <p class="hero-lede rv">
+              <strong>文渊阁 DocBase</strong> 是一台典籍文件管理器。将散落各处的文籍、代码、图谱归于一册，
+              内置解释器随选随跑，更可越洋直连 MySQL 库房——免去切换诸般器物之烦，让治学与开发归于一途。
+            </p>
+            <div class="hero-act rv">
+              <a href="#acquire" class="btn btn-seal btn-lg">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                下载文渊阁
+              </a>
+              <a href="#volume" class="btn btn-ink btn-lg">展阅其能</a>
+            </div>
+          </div>
+
+          <!-- 右：册页 -->
+          <aside class="folio rv">
+            <div class="folio-cap">
+              <b>卷 一 · 典籍分类</b>
+              <span>CAT. 01–06</span>
+            </div>
+            <div class="cat-row">
+              <span class="cat-tag">文</span>
+              <span class="cat-name">文牍书契</span>
+              <span class="cat-ext">md · txt · pdf · docx</span>
+            </div>
+            <div class="cat-row hot">
+              <span class="cat-tag">代</span>
+              <span class="cat-name">代码脚本</span>
+              <span class="cat-ext">py · js · ts · go · rs</span>
+            </div>
+            <div class="cat-row">
+              <span class="cat-tag">数</span>
+              <span class="cat-name">数册图谱</span>
+              <span class="cat-ext">sql · csv · json · xml</span>
+            </div>
+            <div class="cat-row">
+              <span class="cat-tag">图</span>
+              <span class="cat-name">图卷影像</span>
+              <span class="cat-ext">png · jpg · svg · webp</span>
+            </div>
+            <div class="cat-row">
+              <span class="cat-tag">配</span>
+              <span class="cat-name">配置文契</span>
+              <span class="cat-ext">yaml · toml · ini · env</span>
+            </div>
+            <div class="cat-row">
+              <span class="cat-tag">库</span>
+              <span class="cat-name">库房连通</span>
+              <span class="cat-ext">mysql · pgsql · mssql · sqlite</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="scroll-rule rv"><span>其 能 有 三</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 功能 ===== -->
+    <section id="volume">
+      <div class="wrap">
+        <div class="ch-head rv">
+          <span class="ch-no">第 一 卷 · 功 能</span>
+          <h2 class="ch-title">三事俱备，治学开发皆宜</h2>
+          <p class="ch-desc">归文、行码、连库——把日常零散的操作收进同一处案头。</p>
+        </div>
+
+        <div class="ledger">
+          <!-- 01 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 01</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <h3>典籍归类，一览无遗</h3>
+            <p>籍、码、图、数，无论何种文契，皆可于同一界面开卷浏览、就地编辑。五十余种格式自动识认，无需另装他器；任开一卷皆可按 <code>Ctrl+F</code> 通篇查找，命中处尽数点亮、逐处跳到眼前。</p>
+            <div class="sheet-meta">
+              <span class="chip">五十余格式</span>
+              <span class="chip">实景预览</span>
+              <span class="chip b">档案内查找</span>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 02</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3>解释器随选，落笔即行</h3>
+            <p>内置 Python、Node、C/C++、Go、Rust、Java 等二十余种解释器与编译器，选中即跑。运行出错一律译成中文：<b>指出第几行第几列、什么毛病、该怎么改</b>，原始英文报错退到折叠里备查。</p>
+            <div class="sheet-meta">
+              <span class="chip g">二十余种语言</span>
+              <span class="chip g">即选即跑</span>
+              <span class="chip">中文报错定位</span>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 03</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"></path>
+                <path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"></path>
+              </svg>
+            </div>
+            <h3>越洋连库，直取数册</h3>
+            <p>内嵌终端可经 SSH 远连服务器，亦可直通 MySQL / MariaDB、PostgreSQL、SQL Server、SQLite 库房，查改导一处完成。库房报错同样译成中文，<b>并在 SQL 里标出出错的位置</b>——表名拼错、列不存在、约束冲突，一眼看清。</p>
+            <div class="sheet-meta">
+              <span class="chip b">SSH 隧道</span>
+              <span class="chip b">四种库房</span>
+              <span class="chip b">SQL 报错标位</span>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 04</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            </div>
+            <h3>编目标签，寻之即得</h3>
+            <p>以钤印标签、卷册、最近入档为纲，纵有千册亦可顷刻寻见。检索直通文书正文与批注——记得住一句话、却忘了它在哪一卷，也翻得出来。</p>
+            <div class="sheet-meta">
+              <span class="chip">钤印标签</span>
+              <span class="chip">全文检索</span>
+              <span class="chip">卷册归档</span>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 05</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+            </div>
+            <h3>多卷并陈，各得其位</h3>
+            <p>同时开卷多部，拖拽以调版式；可分屏对读、并行校订。数据库工作台还能把一份文书摊在左侧并读——写作业时不必在窗口之间来回翻找。</p>
+            <div class="sheet-meta">
+              <span class="chip">多标签</span>
+              <span class="chip">分屏对读</span>
+              <span class="chip">作业模式</span>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 06</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="17" height="7.4" rx="1.6"></rect>
+                <line x1="5.2" y1="6.7" x2="9.8" y2="6.7"></line>
+                <line x1="12.6" y1="5.2" x2="12.6" y2="8.2"></line>
+                <rect x="5.6" y="13.6" width="16.4" height="7.4" rx="1.6"></rect>
+                <path d="M8.6 16.2h5.6M8.6 18.4h3.4"></path>
+              </svg>
+            </div>
+            <h3>敲字即补，名字自现</h3>
+            <p>写代码、写 SQL 时敲字母，光标下即列候选：这门语言的关键字与内置名、对象成员，以及<b>本文件里已经出现过的名字</b>。SQL 还认得别名——<code>FROM students s</code> 之后敲 <code>s.</code>，直接列出这张表的真实列名。</p>
+            <div class="sheet-meta">
+              <span class="chip">Tab 接受</span>
+              <span class="chip g">对象成员</span>
+              <span class="chip g">SQL 真列名</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 终端 ===== -->
+    <section id="terminal" style="margin-top: var(--sp-7);">
+      <div class="wrap">
+        <div class="ch-head rv">
+          <span class="ch-no">第 二 卷 · 行 文</span>
+          <h2 class="ch-title">如古人展卷，落笔即见其果</h2>
+          <p class="ch-desc">下方为文渊阁内嵌终端之实景：选册、运行、连库，一气呵成。</p>
+        </div>
+
+        <div class="bamboo-term rv">
+          <div class="term-head">
+            <span class="seal-sm">渊</span>
+            <span class="term-file">文渊阁终端 — docbase</span>
+          </div>
+          <div class="term-body">
+            <div class="t-line"><span class="t-sym">❯</span><span class="t-cmd">docbase --version</span></div>
+            <div class="t-out">文渊阁 DocBase v1.7.2（Windows x64）</div>
+            <div class="t-line"><span class="t-sym">❯</span><span class="t-cmd">docbase open ./典籍</span></div>
+            <div class="t-out">开卷中…… 已识认文契 <span class="t-ok">128</span> 件（文牍 42 · 代码 51 · 数册 23 · 图卷 12）</div>
+            <div class="t-line"><span class="t-sym">❯</span><span class="t-cmd">mysql connect --host 10.0.0.8 --db 库房</span></div>
+            <div class="t-out"><span class="t-ok">✓</span> 经 SSH 隧道连通，库房「库房」已开</div>
+            <div class="t-line"><span class="t-sym">❯</span><span class="t-cmd">run stats.py</span></div>
+            <div class="t-out t-diag">✗ 除数为 0，不能相除（stats.py 第 6 行 · 第 12 列）</div>
+            <div class="t-out t-diag">    return total / count</div>
+            <div class="t-out t-diag">           ^^^^^</div>
+            <div class="t-out t-tip">→ 先判断 count 不为 0，再相除。</div>
+            <div class="t-line"><span class="t-sym">❯</span><span class="t-cmd">mysql exec "SELECT * FROM studnets"</span></div>
+            <div class="t-out t-diag">✗ 表不存在（ER_NO_SUCH_TABLE · 1146）</div>
+            <div class="t-out t-diag">    SELECT * FROM studnets</div>
+            <div class="t-out t-diag">                   ^^^^^^^^</div>
+            <div class="t-out t-tip">→ 检查表名拼写；是不是 students？</div>
+            <div class="t-line"><span class="t-sym">❯</span><span class="caret"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 下载 ===== -->
+    <section id="acquire" style="margin-top: var(--sp-7);">
+      <div class="wrap">
+        <div class="ch-head rv">
+          <span class="ch-no">第 三 卷 · 取 用</span>
+          <h2 class="ch-title">即刻取用，文渊阁归案</h2>
+        </div>
+
+        <div class="get-card rv">
+          <span class="corner c1"></span><span class="corner c2"></span>
+          <span class="corner c3"></span><span class="corner c4"></span>
+
+          <h3 class="get-title">取 文 渊 阁 于 案 头</h3>
+          <p class="get-sub">今仅备 Windows 版，适用于 Windows 10 / 11 系统。开源，永久免费。</p>
+
+          <p class="mobile-tip">
+            <b>手 机 端 提 示</b>
+            文渊阁是 Windows 桌面应用，安装包须在电脑上运行。可先复制下载链接，传到电脑后再取。
+          </p>
+
+          <div class="dl-row">
+            <a href="DocBase-Setup-1.7.2.exe" class="dl-btn" download>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+              </svg>
+              <span>
+                <span class="dl-os">Windows 版</span>
+                <span class="dl-meta" id="dlMeta">v1.7.2 · 64 位 · 约 114.2 MB</span>
+                <i class="dl-bar" id="dlBar" hidden><b></b></i>
+              </span>
+            </a>
+            <!-- 便携版：第二个按钮。**故意不放进多线程分片下载那条链路** ——
+                 site.js 的下载器只认第一个 .dl-btn（安装版）与 #dlBar，而且它的保存对话框
+                 只登记了 .exe；zip 走浏览器原生下载最稳（服务端支持 Range，能续传）。 -->
+            <a href="DocBase-Portable-1.7.2.zip" class="dl-btn" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <path d="M12 11v6"></path><path d="M9.5 14.5 12 17l2.5-2.5"></path>
+              </svg>
+              <span>
+                <span class="dl-os">便携版（zip）</span>
+                <span class="dl-meta">免安装 · 自带 Python 环境 · 约 230.4 MB</span>
+              </span>
+            </a>
+          </div>
+
+          <button class="dl-copy" id="dlCopy" type="button">复制下载链接</button>
+
+          <p class="dl-note">最新版本 <b>v1.7.2</b> · 更新于 二〇二六年九月二十三日</p>
+          <p class="dl-note" style="margin-top:8px">便携版（解压即用 · 自带 Python · 资料跟着 U 盘走）另有专页说明：<a href="portable.html" style="color:var(--cinnabar);border-bottom:1px solid rgba(168,50,42,.35)">便携版使用指南 →</a></p>
+
+          <details class="dl-ck">
+            <summary>浏览器提示「可能有风险」，要不要担心？</summary>
+            <p class="dl-ck-desc">
+              <b>这是正常的，不是文件被污染。</b>Chrome / Edge 与 Windows SmartScreen 对「<b>没有代码签名证书</b> + 下载量还少」的可执行文件一律会提示「可能有风险 / 不常下载，可能不安全」。文渊阁是个人开源软件，没有买代码签名证书，所以拿不到这个「签名」背书 —— 提示的是<b>身份未被验证</b>，不是查出病毒。
+              <br><br>
+              <b>可以这样自行确认：</b>把下载到的文件算一下 SHA-256，与下面那张表比对，一致就是官方原版；也可以装好后在软件里打开 <b>设置 → 关于</b>，程序会自查关键文件并列出一组校验码 —— 表里的<b>构建编号与指纹</b>和软件内显示的完全一致。两者都对得上，就可以放心。
+              <br><br>
+              <b>想让它彻底不提示</b>，只能买 OV / EV 代码签名证书并接进打包流程 —— 那要花钱（EV 每年数千元，OV 便宜些但还得靠下载量慢慢积累信誉）。目前先用「公开校验码 + 程序内自查」这套替代办法。
+            </p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>下载很慢、中途断了怎么办？</summary>
+            <p class="dl-ck-desc">
+              <b>慢在哪：</b>官网这台服务器在<b>境外（欧洲节点）</b>，从国内跨境过去要绕远路 —— 链路往返约 <b>300 ms</b>、丢包约一成。丢包会让单条连接被反复打断，速度自然上不去。
+              <br><br>
+              <b>已经做了两件事：</b>
+              <br>· <b>服务端换了拥塞控制算法（BBR）并调大 TCP 缓冲</b>：BBR 对丢包不敏感，实测单连接从 <b>12 KB/s 升到 357 KB/s（约 28 倍）</b>。
+              <br>· <b>下载按钮改成多线程分片取</b>（8 段并发、真实进度、下完自动比对 SHA-256）：实测再快约 3 倍，<b>约 1 MB/s</b>，115 MB 的包两分钟上下。浏览器若不支持（或你在网址后加 <code>?native</code> 打开本页），会自动退回浏览器原生下载，不会卡住。
+              <br><br>
+              <b>还能再快些：</b>
+              <br>· <b>换个时段</b>：白天的跨境链路通常比晚上好不少。
+              <br>· <b>复制下载链接</b>（上面那个按钮）拿到直链，丢给 IDM / 迅雷这类多线程工具取。
+              <br>· <b>断了不必从头</b>：服务端支持分段下载（HTTP Range），浏览器与下载工具都能续传。
+              <br><br>
+              <b>根治办法（需要域名备案）：</b>把安装包放到对象存储 + CDN 上分发，国内用户从就近节点取，通常能到几 MB/s。这条要在阿里云控制台开 OSS / CDN 并给域名做备案接入，属于后续要办的事，办完会写进更新手记。
+            </p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>校验下载到的是不是官方原版</summary>
+            <p class="dl-ck-desc">下载完成后，把安装包文件的 SHA-256 与下表比对；一致即是官方原版。也可在软件里打开 <b>设置 → 关于</b>，程序会自查关键文件并列出同一组校验码 —— 下表的<b>构建编号与指纹</b>和软件内显示的完全一致，可互相对照。</p>
+            <table class="dl-ck-table">
+              <thead><tr><th>文件</th><th>大小</th><th>SHA-256</th></tr></thead>
+              <tbody id="dlCkBody">
+                <tr><td colspan="3" class="dl-ck-pending">校验码随本次构建生成，下载页更新中…</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 更新手记 ===== -->
+    <section id="journal" style="margin-top: var(--sp-7);">
+      <div class="wrap">
+        <div class="ch-head rv">
+          <span class="ch-no">第 四 卷 · 修 订</span>
+          <h2 class="ch-title">更新手记｜最近修订</h2>
+          <p class="ch-desc">改了什么都记在册上。这里只列最近三版，<b>历次修订另有专页</b>，不必在本页翻找。</p>
+        </div>
+
+        <ol class="journal rv">
+                <li class="jr-item latest rv">
+      <div class="jr-head">
+        <span class="jr-ver">v1.7.2</span>
+        <span class="jr-date">二〇二六年九月二十三日</span>
+        <span class="jr-tag fix">修 复</span>
+      </div>
+      <ul class="jr-list">
+        <li><b>文本档案也有大纲了</b>：Markdown（<code>.md</code>）、纯文本（<code>.txt</code>）与代码档案的阅览栏左侧多了一个「≡ 大纲」。Markdown 的 <code>#</code> 标题会自动分级编号（<code>##</code> 是 <code>1.1</code>，它下面的 <code>###</code> 是 <code>1.1.1</code>）；代码档案认的是 <code>def</code> / <code>class</code> / <code>function</code> / <code>CREATE TABLE</code> 这类定义行，后面还标着「函数 / 类 / 表」。<b>点一下条目正文就跳过去</b> —— 在「修订」里写代码时是光标直接落到那一行，接着就能改。档案里没有标题时会给一句"怎么写标题"的引导，不留一片空白。</li>
+        <li><b>阅览栏多了「全屏」这一档</b>：原来点「加宽」最多只能到"留着侧栏位置"的宽度，左边永远空出一条；把侧栏收起来之后它居然还按侧栏宽度扣，<b>空出的那一整条其实是白留的</b>。现在按钮是三档循环：默认 → 加宽 → <b>铺满整窗</b>（侧栏区域也一起用上）。侧栏收起时「加宽」也直接用满可用宽度。</li>
+        <li><b>侧栏收起后，左边那段留白还给内容</b>：档案卡片的左内边距从 40px 收到 16px —— 收起侧栏本来就是"我要更多地方看文件"，结果内容还缩着一截（顶栏那点不动，左上角浮着展开把手）。</li>
+        <li><b>错题本的题目框自己能滚了</b>：题目很长时不再把整页撑开、把「一键复习」那排按钮顶到屏幕外面 —— 题目框自己滚，卡片标题与按钮始终留在视野里；滚轮也给错题本详情区与复习弹窗挂了兜底。</li>
+        <li><b>修掉连接列表"凭空消失"</b>：连上数据库后连接列表会自动收起（把宽度让给编辑区），可它的展开入口长在工作区工具条上 —— <b>一断开连接、工作区隐藏，入口跟着没了</b>，列表又被收起状态藏着，于是整个界面里再也找不到连接列表、也连不上别的库。现在未连接时列表一律放出来（断开之后你正要挑下一个连接嘛）。</li>
+      </ul>
+    </li>
+<li class="jr-item rv">
+      <div class="jr-head">
+        <span class="jr-ver">v1.7.1</span>
+        <span class="jr-date">二〇二六年九月二十三日</span>
+        <span class="jr-tag new">新增</span>
+      </div>
+      <ul class="jr-list">
+        <li><b>笔记本有了 Jupyter 那一套快捷键</b>：先点一下格子的空白处（或按 <code>Esc</code> 从输入框退出来），就进了「命令态」—— <code>a</code> 在上方插一格、<code>b</code> 在下方插一格、<code>dd</code> 删掉这一格、<code>x</code> 剪切、<code>c</code> 复制、<code>v</code> 粘到选中格的正下方、<code>z</code> 撤销单元格操作（剪掉的、删掉的、粘出来的都能退回来）；<code>Enter</code> 回到输入框，<code>m</code> / <code>y</code> 在标题格与代码格之间来回切。<b>在输入框里打字时这些字母就只是字母</b>，不会凭空插出一格。工具条上也放了一个「⌨ 快捷键」，随时点开照单子按。</li>
+        <li><b>每个格子前面那道竖杠会表达状态了</b>：<b>蓝色 = 选中了这一格</b>（现在按字母是在操作格子），<b>绿色 = 光标就在这一格里</b>（正在打字）。一屏里只有一格会变色，扫一眼就知道现在按字母是插格还是打字。</li>
+        <li><b>补全改成按 <code>Tab</code> 唤起</b>：以前敲一个字就往外冒候选框，连着写代码被一个接一个地打断；现在<b>打字时安安静静</b>，想补的时候按一下 <code>Tab</code> 才弹出来。只有唯一候选时（比如 <code>retu</code>）按一下就直接补成 <code>return</code>；<b>没有候选可补时 <code>Tab</code> 仍然是缩进</b> —— 写代码按 Tab 缩进的老习惯一点没变。<code>Ctrl+空格</code> 也还能随时唤起。数据库「SQL 查询」页保持原来的敲字即弹（那里补的是库名表名列名，随手就有用）。</li>
+      </ul>
+    </li>
+        <li class="jr-item rv">
+      <div class="jr-head">
+        <span class="jr-ver">v1.7.0</span>
+        <span class="jr-date">二〇二六年九月二十三日</span>
+        <span class="jr-tag new">新增</span>
+      </div>
+      <ul class="jr-list">
+        <li><b>软件能直接当笔记本用了（<code>.ipynb</code>）</b>：Jupyter 的笔记本档案现在打开就是笔记本 —— 一格一格地写、单独运行某一格、格子之间共享变量、输出与插图都留在格子里。</li>
+        <li><b>笔记本的侧边大纲</b>：像 Jupyter 的目录那样自动编号（<code>## 变成 0.1</code>，它下面的 <code>### 是 0.1.1</code>），<b>只列标题</b>不塞代码，可折叠、点一下跳过去，滚到哪一节就高亮哪一节。</li>
+        <li><b>笔记本里也有上色、补全与中文报错</b>：关键字、字符串、数字各自颜色；补全沿用"导包后的成员也能补"那一套；出错给的是中文解释（第几行、什么毛病、怎么改），不是一坨英文 traceback。</li>
+        <li><b>错题本里的 SQL 题能在指定的库里重做了</b>：复习弹窗多了一行「在哪运行」（选连接 + 选库），点「运行作答」<b>真的在那个数据库里执行</b>，结果按表格回来，摘要写清「在 哪个连接 / 哪个库 中执行」；没选连接时会明说"这次只做了语法初检"，不让你以为已经跑过了。选过的连接记在这道题上，下次重做直接选中。</li>
+        <li><b>每份代码档案有了固定的工作目录</b>：以前运行是在一个临时目录里跑、<b>跑完就把目录删掉</b> —— 脚本存下的 result.csv 你再也找不到；而库里的档案在磁盘上是<b>哈希名</b>，一眼认不出谁是谁。现在每份代码档案有一个以<b>档案名命名</b>的工作目录：源码（原名）、你放进去给它读的数据文件、它生成的结果都在这里，跑完不删。<code>open("data.txt")</code> 这种相对路径也终于能用了；终端装的包与「运行」在同一个目录，脚本直接就能 import。</li>
+        <li><b>运行结果里直接告诉你产物在哪</b>：跑完在输出区上方给出工作目录的完整路径，附「打开工作目录」「定位源码」，并列出这次生成了哪几个文件（这些文件照旧自动入档，库里也看得见）。</li>
+        <li><b>字号旁边多了「📁 文件夹」</b>：只有编程类档案才出现，一点就在资源管理器里打开这份代码的工作目录 —— 找它读写的文件不用再翻目录。</li>
+        <li><b>补全不再是"写死的词表"</b>：以前只认内置那几百个名字 —— <code>import pandas as pd</code> 之后敲 <code>pd.</code> 什么都没有。现在会<b>问真实的 Python 环境</b>（真 <code>dir()</code>）：导包后的成员、<code>import</code> 行该写哪个模块、<code>from x import …</code> 有哪些名字都给；新装的包立刻生效（结论缓存十分钟，打字不卡手）。</li>
+        <li><b>修掉三个"点了没反应"</b>：① 「知识点」小窗其实每次都打开了，但被阅览栏盖在下面（从 v1.6.1 就有的老毛病）；② 笔记本里<b>内容多的格子显示不全</b>（被上色层裁掉，只显示两行高）；③ 打开文件夹 / 定位文件失败时一声不吭，现在会明确告诉你原因。</li>
+      </ul>
+    </li>
+        </ol>
+
+        <p class="jr-more rv"><a href="journal.html" class="btn btn-seal btn-lg">查看全部修订 →</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 页脚 ===== -->
+  <footer>
+    <div class="wrap foot-in">
+      <a href="#" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <ul class="foot-links">
+        <li><a href="portable.html">便携版</a></li>
+        <li><a href="#">使用手册</a></li>
+        <li><a href="#">插件市集</a></li>
+        <li><a href="journal.html">更新手记</a></li>
+          <li><a href="feedback.html">反馈 / 提建议</a></li>
+        <li><a href="#">关于文渊阁</a></li>
+      </ul>
+      <p class="foot-copy">© 二〇二六年 文渊阁 DocBase · MIT 开源许可</p>
+    </div>
+  </footer>
+
+  <!-- ===== 回到顶部（仅手机端显形） ===== -->
+  <button class="totop" id="totop" type="button" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+  <script src="site.js" defer></script>
+  <script>
+    /* ===== 下载校验码：读 purity.json，把安装包与关键文件的 SHA-256 列出来 ===== */
+    (async () => {
+      const body = document.getElementById('dlCkBody');
+      if (!body) return;
+      try {
+        const r = await fetch('purity.json', { cache: 'no-cache' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const m = await r.json();
+        const files = (m.files || []).filter(f => f.sha256);
+        if (!files.length) throw new Error('清单为空');
+        const mb = n => (n / 1048576).toFixed(1) + ' MB';
+        const inst = files.find(f => /^文渊阁-安装程序-v[\d.]+\.exe$/i.test(f.name) || /^DocBase-Setup-[\d.]+\.exe$/i.test(f.name));
+        /* 安装包在站上是以下载链接里的名字提供的（DocBase-Setup-x.y.z.exe），清单里记的却是
+           构建产物名（文渊阁-安装程序-vx.y.z.exe）—— 字节相同、哈希相同，但名字对不上会让
+           人以为「表里写的不是我下的那个」。所以这一行按下载链接里的真名显示，其余照抄清单。 */
+        const dl = document.querySelector('.dl-btn');
+        /* 取链接的**文件名部分**：主站上 href 就是文件名，镜像站上它是绝对地址
+           （指向 GitHub Releases）—— 直接把整条 href 当文件名显示，表里会出现一条 URL。 */
+        const dlName = dl ? ((dl.getAttribute('href') || '').split('/').pop()) : '';
+        /* 多线程下载器（site.js）要用它做「下完自动比对」，先交给它 */
+        if (inst && inst.sha256) window.__dlSha = inst.sha256;
+        body.innerHTML = files.map(f => {
+          const nm = (f === inst && dlName) ? dlName : f.name;
+          return '<tr><td>' + nm + '</td><td>' + mb(f.size) + '</td><td>' + f.sha256 + '</td></tr>';
+        }).join('');
+        /* 下载按钮上的版本与体积按清单回填：升版本时只改 purity.json（构建产物）即可，
+           页面不会出现「链接是 1.2.7、标注还写着 1.2.6」这种对不上的情况。 */
+        const dlMeta = document.getElementById('dlMeta');
+        if (inst && dlMeta) {
+          const v = (inst.name.match(/v?(\d+\.\d+\.\d+)/) || [])[1];
+          dlMeta.textContent = (v ? 'v' + v + ' · ' : '') + '64 位 · 约 ' + mb(inst.size);
+        }
+        const note = document.querySelector('.dl-ck-desc');
+        if (note && m.buildId) note.insertAdjacentHTML('beforeend', '<br><span style="color:var(--ink-3)">本次构建编号：' + m.buildId + '　指纹：' + (m.fingerprint || '—') + '</span>');
+      } catch (e) {
+        body.innerHTML = '<tr><td colspan="3" class="dl-ck-pending">校验码暂未随页发布，可在软件内「设置 → 关于」查看。</td></tr>';
+      }
+    })();
+
+    /* ===== 下载按钮的交互在 site.js 里（v1.4.2 改成多线程分片下载 + 真实进度）===== */
+  </script>
+</body>
+</html>

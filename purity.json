@@ -1,0 +1,29 @@
+{
+  "product": "文渊阁",
+  "version": "1.7.2",
+  "buildId": "WYG-202609231034-1CD9B6",
+  "builtAt": "2026-09-23T10:34:48.223Z",
+  "home": "https://bishe.xin",
+  "node": "v22.22.2",
+  "platform": "win32/x64",
+  "files": [
+    {
+      "name": "server.bundle.cjs",
+      "size": 9619460,
+      "sha256": "05c92ae64e44d893b2c47060d82068c918b5643b35e2a261602b2b7d60130c87"
+    },
+    {
+      "name": "app.asar",
+      "size": 52560433,
+      "sha256": "1ba227eeb75d35b9c737250ee294ccd01dedec177736915ea41c1f6a8372ee76"
+    },
+    {
+      "name": "文渊阁-安装程序-v1.7.2.exe",
+      "size": 119744754,
+      "sha256": "590b512a4bb40eb09f0e0a87e1b7f621bfb2091f080f89e526dec9d45063899f",
+      "md5": "89f4d500f433fe863e5d7c12e21df4df"
+    }
+  ],
+  "sign": null,
+  "fingerprint": "E5FE462E75871417"
+}

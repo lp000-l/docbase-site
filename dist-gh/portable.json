@@ -1,0 +1,11 @@
+{
+  "product": "文渊阁",
+  "edition": "portable",
+  "version": "1.7.2",
+  "file": "DocBase-Portable-1.7.2.zip",
+  "size": 241598369,
+  "sha256": "5552d04663463b052c5e9addfbde0db5923b97cf841b57519d3277785b3d027a",
+  "md5": "c1519e8f5f139711c2909650303c0473",
+  "builtAt": "2026-09-23T11:04:51.725Z",
+  "note": "便携版（U 盘版）：免安装、自带 Python 环境、资料存在自己旁边的 data 目录"
+}
