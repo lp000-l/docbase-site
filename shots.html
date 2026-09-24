@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ede0">
+  <meta name="format-detection" content="telephone=no">
+  <title>界面一览 · 文渊阁 DocBase</title>
+  <meta name="mirror-of" content="https://bishe.xin/">
+  <meta name="description" content="文渊阁 DocBase 界面实拍：档案工作台、代码运行、笔记本、表格编辑、数据库工作台 —— 软件到底长什么样，一页看完。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="site.css">
+
+  <!-- 本页专属排版。只用站点已有的变量（--paper* --ink* --cinnabar --rule* --sp-* --font-*），
+       不另立色板 —— 官网与客户端不是同一套 CSS 变量，混用会让整条声明失效。 -->
+  <style>
+    .sh-sec { padding: var(--sp-6) 0; }
+    .sh-sub { font-family: var(--font-label); font-size: 11.5px; letter-spacing: .3em; color: var(--cinnabar); margin-bottom: 10px; }
+    .sh-h { font-family: var(--font-display); font-size: clamp(22px, 3.4vw, 30px); font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 14px; }
+    .sh-lead { font-size: 14.5px; line-height: 2; color: var(--ink-2); max-width: 44em; margin-bottom: var(--sp-4); }
+    .sh-lead b { color: var(--ink); font-weight: 600; }
+
+    .sh-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-5); }
+    @media (min-width: 900px) { .sh-grid { grid-template-columns: 1fr 1fr; } }
+    .sh-card {
+      background: var(--paper-2); border: 1px solid var(--rule);
+      border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .sh-card.sh-wide { grid-column: 1 / -1; }
+    .sh-shot { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--rule); background: #f4ede0; }
+    .sh-cap { padding: 14px 18px 16px; }
+    .sh-cap h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+    .sh-cap p { font-size: 13px; line-height: 1.9; color: var(--ink-2); }
+    .sh-cap p + p { margin-top: 6px; }
+    .sh-cap b { color: var(--ink); font-weight: 600; }
+    .sh-cap code { font-family: var(--font-mono); font-size: 12px; background: var(--paper-deep); border: 1px solid var(--rule); border-radius: 4px; padding: 0 4px; }
+
+    .sh-notes { margin-top: var(--sp-5); display: grid; gap: 12px; }
+    @media (min-width: 900px) { .sh-notes { grid-template-columns: repeat(3, 1fr); } }
+    .sh-note { border-left: 2px solid var(--cinnabar); padding: 4px 0 4px 14px; }
+    .sh-note b { display: block; font-size: 13.5px; color: var(--ink); font-weight: 600; margin-bottom: 4px; }
+    .sh-note span { font-size: 13px; line-height: 1.85; color: var(--ink-2); }
+
+    .sh-cta { margin-top: var(--sp-6); text-align: center; }
+    .sh-cta p { font-size: 13.5px; color: var(--ink-2); margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+  <div class="paper-field"></div>
+  <div class="halo"></div>
+
+  <!-- ===== 顶栏 ===== -->
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a href="index.html" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#volume">功能</a>
+        <a href="index.html#terminal">运行</a>
+        <a href="portable.html">便携版</a>
+        <a href="shots.html" class="on">界面</a>
+        <a href="index.html#acquire">下载</a>
+        <a href="journal.html">更新手记</a>
+        <a href="feedback.html">反馈</a>
+        <a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <a href="index.html#acquire" class="btn btn-seal nav-cta">免费下载</a>
+      <button class="burger" id="burger" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="mnav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== 手机端抽屉导航 ===== -->
+  <div class="mnav-mask" id="mnavMask"></div>
+  <nav class="mnav" id="mnav" aria-label="手机端导航">
+    <a href="index.html#volume">功能</a>
+    <a href="index.html#terminal">运行</a>
+    <a href="portable.html">便携版</a>
+    <a href="shots.html">界面一览</a>
+    <a href="index.html#acquire">下载</a>
+    <a href="journal.html">更新手记</a>
+    <a href="feedback.html">反馈</a>
+    <a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub 仓库</a>
+    <a href="index.html#acquire" class="btn btn-seal">免费下载</a>
+  </nav>
+
+  <main>
+    <section class="sh-sec">
+      <div class="wrap">
+        <p class="sh-sub">界 面 一 览</p>
+        <h1 class="sh-h">先说清楚它长什么样</h1>
+        <p class="sh-lead">
+          下面是软件的真实界面（当前版本 v1.7.2，不是什么演示稿）。一台电脑上把
+          <b>文档、表格、幻灯片、PDF、图片、代码、笔记本、数据库</b>都放进同一个界面 ——
+          读完这一页，你就知道它到底能替掉你桌面上的哪几个窗口。
+        </p>
+
+        <div class="sh-grid">
+
+          <figure class="sh-card sh-wide">
+            <img class="sh-shot" src="img/app/01-workbench.png" alt="文渊阁档案工作台：左侧档案列表按标签与文件夹归类，右侧开卷即读，文本档案带侧边大纲" loading="lazy" width="1440" height="900">
+            <figcaption class="sh-cap">
+              <h3>档案工作台 —— 五十余种格式，放进来看见就能读</h3>
+              <p>左侧是<b>档案列表</b>：按「钤印标签 / 卷册 / 最近入档」归类，每份档案带类型与大小。</p>
+              <p>右侧是<b>阅览栏</b>：Markdown 与富文本按原样排版；文本与代码档案左侧还有一道
+                <b>「≡ 大纲」</b>，按标题自动分级编号（<code>##</code> → <code>1.1</code>，其下 <code>###</code> → <code>1.1.1</code>），
+                点一下正文就跳到那一节。代码档案认的是 <code>def</code> / <code>class</code> / <code>CREATE TABLE</code> 这类定义行，
+                后面还标着是函数、类还是表。</p>
+            </figcaption>
+          </figure>
+
+          <figure class="sh-card">
+            <img class="sh-shot" src="img/app/02-run-code.png" alt="文渊阁里运行 Python 代码：编辑区带关键字彩色，下方是运行结果输出" loading="lazy" width="1440" height="900">
+            <figcaption class="sh-cap">
+              <h3>代码运行 —— 落笔即见其果</h3>
+              <p>选中解释器按一下「▶ 运行」，结果就在下方。关键字彩色、缩进、<b>按 Tab 唤起补全</b>
+                （导包后的包内成员、你自己定义过的名字都会列出来）。</p>
+              <p>出错一律<b>译成中文</b>：第几行第几列、什么毛病、该怎么改；原始英文报错折叠备查。</p>
+            </figcaption>
+          </figure>
+
+          <figure class="sh-card">
+            <img class="sh-shot" src="img/app/03-notebook.png" alt="文渊阁的 .ipynb 笔记本界面：标题格与代码格，格子里保留了运行输出，右侧是只列标题的大纲" loading="lazy" width="1440" height="900">
+            <figcaption class="sh-cap">
+              <h3>笔记本（<code>.ipynb</code>）—— 像 Jupyter 一样一格一格写</h3>
+              <p>打开就是笔记本：单格运行、格间共享变量，<b>输出与插图留在格子里</b>，
+                格号 <code>In&nbsp;[1]</code> 跟着走。</p>
+              <p>Jupyter 那套快捷键都在（<code>a</code> <code>b</code> <code>dd</code> <code>x</code> <code>c</code> <code>v</code> <code>z</code>、<code>Enter</code> / <code>Esc</code>、<code>m</code> / <code>y</code>），
+                格前那道短竖条会报状态：<b>蓝 = 选中，绿 = 编辑中</b>。</p>
+            </figcaption>
+          </figure>
+
+          <figure class="sh-card">
+            <img class="sh-shot" src="img/app/04-sheet-edit.png" alt="文渊阁的表格编辑器：像电子表格一样就地编辑单元格" loading="lazy" width="1440" height="900">
+            <figcaption class="sh-cap">
+              <h3>表格编辑 —— 就地改，不用导出再用别的软件开</h3>
+              <p>单元格直接改，行列随时增删；长内容自动撑高，不会憋在一条窄缝里。</p>
+              <p>「阅览 / 修订」两个标签随时对照，改完即存。</p>
+            </figcaption>
+          </figure>
+
+          <figure class="sh-card sh-wide">
+            <img class="sh-shot" src="img/app/05-database.png" alt="文渊阁数据库工作台：左侧连接与表树，右侧是表数据，可直接写 SQL 查询" loading="lazy" width="1440" height="900">
+            <figcaption class="sh-cap">
+              <h3>数据库工作台 —— 直接把库连进知识库</h3>
+              <p>支持 <b>MySQL / MariaDB、PostgreSQL、SQL Server、SQLite</b>，内嵌终端还能 SSH 远连服务器。</p>
+              <p>左侧是连接与表树，点开就是数据；写 SQL 时结果直接以表格呈现。
+                库房报错同样<b>译成中文并在 SQL 里标出出错位置</b> —— 表名拼错、列不存在、约束冲突，一眼看清。
+                <code>FROM students s</code> 之后敲 <code>s.</code>，会列出这张表的<b>真实列名</b>。</p>
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <div class="sh-notes">
+          <div class="sh-note">
+            <b>纯本地，不注册</b>
+            <span>档案、设置、数据库连接都在你指定的数据目录里；数据库密码本机加密后才落盘。没有账号，也没有遥测。</span>
+          </div>
+          <div class="sh-note">
+            <b>每个代码档案一个固定工作目录</b>
+            <span>源码、你放进去给脚本读的数据文件、脚本生成的结果都在一起 —— 相对路径真的能用，跑完也不删。</span>
+          </div>
+          <div class="sh-note">
+            <b>拔了 U 盘也能接着用</b>
+            <span>便携版自带 Python 与中文字体，资料跟着 U 盘走；插到没装过任何环境的电脑上，照样能跑代码。</span>
+          </div>
+        </div>
+
+        <div class="sh-cta">
+          <p>看完了？软件本体就一个安装包，装了就能用。</p>
+          <a href="index.html#acquire" class="btn btn-seal btn-lg">取 文 渊 阁 于 案 头</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-in">
+      <a href="index.html" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <ul class="foot-links">
+        <li><a href="index.html#volume">功能</a></li>
+        <li><a href="portable.html">便携版</a></li>
+        <li><a href="shots.html">界面一览</a></li>
+        <li><a href="index.html#acquire">下载</a></li>
+        <li><a href="journal.html">更新手记</a></li>
+        <li><a href="feedback.html">反馈 / 提建议</a></li>
+        <li><a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+      <p class="foot-copy">© 二〇二六年 文渊阁 DocBase</p>
+    </div>
+    <p class="gh-mirror">本站为 GitHub Pages 镜像站，内容与正式站点同源。正式站点：<a href="https://bishe.xin/">bishe.xin</a></p>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
