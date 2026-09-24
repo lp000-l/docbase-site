@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ede0">
+  <meta name="format-detection" content="telephone=no">
+  <title>便携版 · 文渊阁 DocBase</title>
+  <meta name="mirror-of" content="https://bishe.xin/">
+  <meta name="description" content="文渊阁便携版：免安装、自带 Python 编程环境、资料存在自己旁边 —— 拷进 U 盘，插到任何一台 Windows 电脑上就能直接开卷。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="site.css">
+
+  <!-- 本页专属的一点排版（步骤 / 对照表 / 注意事项）。
+       只用站点已有的变量（--paper* --ink* --cinnabar --rule* --sp-* --font-*），
+       不另立一套色板 —— 官网与客户端不是同一套 CSS 变量，混用会让整条声明失效。 -->
+  <style>
+    .pf-sec { padding: var(--sp-6) 0; }
+    .pf-sec + .pf-sec { padding-top: 0; }
+    .pf-sub { font-family: var(--font-label); font-size: 11.5px; letter-spacing: .3em; color: var(--cinnabar); margin-bottom: 10px; }
+    .pf-h { font-family: var(--font-display); font-size: clamp(22px, 3.4vw, 30px); font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 14px; }
+    .pf-lead { font-size: 14.5px; line-height: 2; color: var(--ink-2); max-width: 44em; margin-bottom: var(--sp-5); }
+    .pf-lead b { color: var(--ink); font-weight: 600; }
+
+    .pf-steps { counter-reset: pf; list-style: none; max-width: 900px; }
+    .pf-steps > li {
+      counter-increment: pf; position: relative;
+      padding: 0 0 var(--sp-5) 62px; border-left: 2px solid var(--rule);
+      margin-left: 18px;
+    }
+    .pf-steps > li:last-child { padding-bottom: 6px; }
+    .pf-steps > li::before {
+      content: counter(pf); position: absolute; left: -19px; top: -4px;
+      width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--paper); border: 2px solid var(--cinnabar); color: var(--cinnabar);
+      font-family: var(--font-display); font-size: 17px; font-weight: 600;
+    }
+    .pf-steps h4 { font-family: var(--font-display); font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: .03em; }
+    .pf-steps p { font-size: 14px; line-height: 1.95; color: var(--ink-2); }
+    .pf-steps p + p { margin-top: 8px; }
+    .pf-steps code, .pf-lead code, .pf-notes code { font-family: var(--font-label); font-size: 12.5px; background: var(--paper-2); color: var(--ink); padding: 1px 6px; border-radius: 2px; }
+
+    .pf-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .pf-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 13.5px; }
+    .pf-table th, .pf-table td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.8; }
+    .pf-table thead th { font-family: var(--font-label); font-size: 11.5px; letter-spacing: .14em; color: var(--ink-3); border-bottom: 1px solid var(--rule-strong); }
+    .pf-table tbody th { font-weight: 500; color: var(--ink-3); white-space: nowrap; width: 8em; }
+    .pf-table td { color: var(--ink-2); }
+    .pf-table .y { color: var(--bamboo); }
+    .pf-table .n { color: var(--ink-4); }
+
+    .pf-notes { list-style: none; max-width: 900px; }
+    .pf-notes li { position: relative; padding: 0 0 14px 22px; font-size: 14px; line-height: 1.95; color: var(--ink-2); }
+    .pf-notes li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 6px; height: 6px; background: var(--cinnabar); border-radius: 1px; }
+    .pf-notes b { color: var(--ink); font-weight: 600; }
+
+    .pf-sheets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    .pf-sheets .sheet { border: none; }
+    .pf-alt { margin-top: var(--sp-4); font-size: 13px; color: var(--ink-3); }
+    .pf-alt a { color: var(--cinnabar); border-bottom: 1px solid rgba(168,50,42,.35); }
+    .pf-alt a:hover { border-bottom-color: var(--cinnabar); }
+    .pf-term-hint { font-size: 12.5px; color: var(--ink-3); line-height: 1.9; margin-top: 12px; }
+    .pf-kv { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 14px 0 0; font-size: 12.5px; color: var(--ink-3); }
+    .pf-kv b { font-family: var(--font-label); color: var(--ink-2); font-weight: 500; }
+
+    @media (max-width: 1024px) {
+      .pf-sheets { grid-template-columns: 1fr; }
+    }
+    .pf-tree-c { padding-left: 14px; }
+    @media (max-width: 720px) {
+      /* 目录树里的「← 说明」在窄屏换成自己一行，别被黑框裁掉 */
+      .pf-term .t-line { flex-wrap: wrap; }
+      .pf-tree-c { padding-left: 24px; width: 100%; }
+      .pf-sec { padding: var(--sp-5) 0; }
+      .pf-steps > li { padding-left: 46px; margin-left: 14px; }
+      .pf-steps > li::before { width: 30px; height: 30px; left: -16px; font-size: 15px; }
+      .pf-lead { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="paper-field"></div>
+  <div class="halo"></div>
+
+  <!-- ===== 顶栏 ===== -->
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a href="index.html" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a href="index.html#volume">功能</a>
+        <a href="index.html#terminal">运行</a>
+        <a href="portable.html" class="on">便携版</a>
+        <a href="index.html#acquire">下载</a>
+        <a href="journal.html">更新手记</a>
+        <a href="feedback.html">反馈</a>
+        <a href="shots.html">界面</a>
+        <a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <a href="#get" class="btn btn-seal nav-cta">取便携版</a>
+      <button class="burger" id="burger" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="mnav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== 手机端抽屉导航 ===== -->
+  <div class="mnav-mask" id="mnavMask"></div>
+  <nav class="mnav" id="mnav" aria-label="手机端导航">
+    <a href="index.html#volume">功能</a>
+    <a href="index.html#terminal">运行</a>
+    <a href="portable.html">便携版</a>
+    <a href="index.html#acquire">下载</a>
+    <a href="journal.html">更新手记</a>
+    <a href="feedback.html">反馈</a>
+    <a href="shots.html">界面一览</a>
+    <a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub 仓库</a>
+    <a href="#get" class="btn btn-seal">取便携版</a>
+  </nav>
+
+  <main>
+    <!-- ===== 起首 ===== -->
+    <section class="subhero">
+      <div class="wrap">
+        <div class="ch-head rv">
+          <span class="ch-no">第 五 卷 · 随 身</span>
+          <h2 class="ch-title">便携版｜装进 U 盘，随处开卷</h2>
+          <p class="ch-desc">免安装、<b>自带编程环境</b>、资料存在自己旁边 —— 拷进 U 盘或移动硬盘，<br>插到任何一台 Windows 电脑上，双击就能用；换台机器插上，接着上次的活干。</p>
+        </div>
+        <p class="jr-back rv">
+          <a href="#get" class="btn btn-seal">↓ 直接下载</a>
+          <a href="index.html#acquire" class="btn">我要安装版（推荐日常用）</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== 一句话说清 ===== -->
+    <section class="pf-sec" id="what">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">它解决什么问题</span>
+          <h3 class="pf-h">别人的电脑上没有你的环境，便携版把这套环境一起带上</h3>
+          <p class="pf-lead">
+            安装版把程序装进系统、资料放在你指定的目录（本机 <code>D:\does</code> 那种）；<b>便携版则是"一整个文件夹就是一个完整的文渊阁"</b> ——
+            程序、Python 运行环境、你的全部资料都在这个文件夹里，一句"拷过去"就完事。
+            它不改注册表、不装到「添加或删除程序」里，<b>也不往 C 盘用户目录里写东西</b>（这一点在别人的电脑、机房的电脑上尤其要紧）。
+          </p>
+        </div>
+
+        <div class="pf-sheets">
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 01</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M4 20h16"></path>
+              </svg>
+            </div>
+            <h3>免安装，双击即用</h3>
+            <p>文件夹拷到哪儿、盘符变成什么，都不影响。没有安装程序、没有卸载残留，不想要了直接删掉整个文件夹 —— 包括你放进去的资料，一起带走。</p>
+            <div class="sheet-meta"><span class="chip">免安装</span><span class="chip">不写注册表</span></div>
+          </article>
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 02</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 18l6-6-6-6"></path><path d="M8 6l-6 6 6 6"></path>
+              </svg>
+            </div>
+            <h3>自带 Python，编程功能开箱可用</h3>
+            <p>内置 Python 3.13，并预装 <b>numpy / pandas / matplotlib / openpyxl / requests</b>，还补上了中文字体。插到<b>没装过任何编程环境</b>的电脑上，代码照样跑、Excel 照样读写、图照样画。</p>
+            <div class="sheet-meta"><span class="chip g">Python 3.13</span><span class="chip g">中文图表</span></div>
+          </article>
+          <article class="sheet rv">
+            <span class="sheet-no">NO. 03</span>
+            <div class="sheet-ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M8 4v16"></path>
+              </svg>
+            </div>
+            <h3>资料跟着盘走</h3>
+            <p>全部资料都在 <code>data</code> 子目录里：入档的档案、知识点与错题、数据库连接、代码档案的工作目录、笔记本环境。<b>换台电脑插上就是同一个人</b>，不用同步、不用登录。</p>
+            <div class="sheet-meta"><span class="chip b">随盘带走</span><span class="chip b">不碰 C 盘</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 取用 ===== -->
+    <section class="pf-sec" id="get">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">取 用</span>
+          <h3 class="pf-h">下载便携版（压缩包）</h3>
+          <p class="pf-lead">一个 zip，解压出来就是那个完整的文件夹。<b>解压到 U 盘或任意文件夹都行</b>（路径里带中文也没问题）。</p>
+        </div>
+
+        <div class="get-card rv">
+          <span class="corner c1"></span><span class="corner c2"></span>
+          <span class="corner c3"></span><span class="corner c4"></span>
+
+          <h3 class="get-title">取 便 携 版 于 盘 中</h3>
+          <p class="get-sub">Windows 10 / 11，64 位。解压即用，无需安装。开源，永久免费。</p>
+
+          <p class="mobile-tip">
+            <b>手 机 端 提 示</b>
+            便携版体积约 230 MB，须在电脑上下载解压。可先复制下载链接，传到电脑后再取。
+          </p>
+
+          <div class="dl-row">
+            <a href="https://github.com/lp000-l/docbase-site/releases/download/v1.7.3/DocBase-Portable-1.7.3.zip" class="dl-btn" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <path d="M12 11v6"></path><path d="M9.5 14.5 12 17l2.5-2.5"></path>
+              </svg>
+              <span>
+                <span class="dl-os">便携版（zip）</span>
+                <span class="dl-meta" id="pfMeta">v1.7.3 · 64 位 · 解压后约 536.6 MB · 压缩包约 212.5 MB</span>
+              </span>
+            </a>
+          </div>
+
+          <button class="dl-copy" id="dlCopy" type="button">复制下载链接</button>
+
+          <p class="dl-note">便携版 <b>v1.7.3</b> · 与安装版同源同一版 · 更新于 二〇二六年九月二十四日</p>
+
+          <details class="dl-ck" open>
+            <summary>这个包有多大、解压出来是什么样</summary>
+            <p class="dl-ck-desc">
+              压缩包 <b id="pfSizeZip">222,819,858 字节（约 212.5 MB）</b>，解压后 <b>约 536.6 MB</b>，
+              其中大部分是自带的 Python 运行环境与它预装的库（约 156 MB）——
+              <b>正因为带上了它，才能"插到没环境的电脑上也能跑代码"</b>。
+              解压需要与压缩包差不多两倍的空间，U 盘建议 <b>1 GB 以上</b>可用容量。
+            </p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>校验下载到的是不是官方原版</summary>
+            <p class="dl-ck-desc">把下载到的 zip 算一下 SHA-256 / MD5，与下表比对；一致即是官方原版。下表的数值由打包流程随包生成（<code>portable.json</code>），与页面显示同源。</p>
+            <table class="dl-ck-table">
+              <thead><tr><th>文件</th><th>大小</th><th>SHA-256</th></tr></thead>
+              <tbody id="pfCkBody">
+                <tr>
+                  <td>DocBase-Portable-1.7.3.zip</td>
+                  <td>212.5 MB</td>
+                  <td style="word-break:break-all">b1f83b2cb95fe16ff4de75b49aebc2a18118dcc9fea248d15035f318618c930e</td>
+                </tr>
+                <tr>
+                  <td colspan="3" style="font-family:var(--font-label);font-size:10.5px;color:var(--ink-3)">
+                    MD5：<span id="pfMd5" style="word-break:break-all">22011898ee53ef63cdab496e1b4c7d49</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+
+          <details class="dl-ck">
+            <summary>杀毒软件 / 浏览器提示「可能有风险」？</summary>
+            <p class="dl-ck-desc">
+              <b>这是正常的，不是文件被污染。</b>文渊阁是个人开源软件，没有买代码签名证书，浏览器与 Windows SmartScreen 对「未签名 + 下载量还少」的文件一律会提示 —— 提示的是<b>身份未被验证</b>，不是查出病毒。用上面的校验码自行比对即可确认是官方原版。
+              <br><br>便携版更容易被误报一次：它里面有一个完整的 <code>python.exe</code>，某些杀软对"U 盘里的绿色版 Python"比较敏感。若不放心，可只保留安装版；或把整个文件夹加入白名单。
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 怎么用 ===== -->
+    <section class="pf-sec" id="how">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">三步用起来</span>
+          <h3 class="pf-h">怎么用</h3>
+          <p class="pf-lead">没有安装步骤，只有"拷贝"和"双击"。</p>
+        </div>
+
+        <ol class="pf-steps rv">
+          <li>
+            <h4>解压到 U 盘（或任意文件夹、移动硬盘）</h4>
+            <p>把 <code>DocBase-Portable-1.7.3.zip</code> 解压，得到一个名为 <code>文渊阁便携版</code> 的文件夹。整个文件夹拷到 U 盘根目录就行 —— <b>别只拷里面的 exe</b>，程序与资料都在文件夹里。</p>
+          </li>
+          <li>
+            <h4>双击文件夹里的「文渊阁.exe」</h4>
+            <p>就这么简单，没有安装向导、不用管理员权限。第一次启动会稍慢几秒（U 盘读取比硬盘慢），之后正常。</p>
+            <p>程序会认出自己旁边有 <code>portable.txt</code>，于是自动进入便携模式：<b>资料存在自己旁边的 data 目录</b>，不写进 C 盘的 AppData。</p>
+          </li>
+          <li>
+            <h4>正常用；要换电脑时，退出程序、拔盘、插到新机器上再双击</h4>
+            <p>新电脑上盘符可能从 <code>D:</code> 变成 <code>E:</code>——没关系，程序里所有路径都是相对自己算出来的。档案、知识点、错题、数据库连接、代码工作目录全都在 <code>data</code> 里，接着上次的活干。</p>
+            <p><b>拔盘之前先退出程序</b>，别在写资料的时候直接拔。</p>
+          </li>
+        </ol>
+
+        <div class="bamboo-term pf-term rv" style="max-width:900px">
+          <div class="term-head">
+            <span class="seal-sm">渊</span>
+            <span class="term-file">U 盘里的样子 — 文渊阁便携版/</span>
+          </div>
+          <div class="term-body">
+            <div class="t-line"><span class="t-out">文渊阁便携版/</span></div>
+            <div class="t-line"><span class="t-out">├─ 文渊阁.exe</span><span class="t-sym pf-tree-c">← 双击它就是打开软件</span></div>
+            <div class="t-line"><span class="t-out">├─ 使用说明.txt</span></div>
+            <div class="t-line"><span class="t-out">├─ portable.txt</span><span class="t-sym pf-tree-c">←「我是便携版」的标记</span></div>
+            <div class="t-line"><span class="t-out">├─ data/</span><span class="t-sym pf-tree-c">← 你的一切都在这里</span></div>
+            <div class="t-line"><span class="t-out">│   ├─ files/</span><span class="t-sym pf-tree-c">入档的文件</span></div>
+            <div class="t-line"><span class="t-out">│   ├─ workdirs/</span><span class="t-sym pf-tree-c">代码档案的工作目录</span></div>
+            <div class="t-line"><span class="t-out">│   └─ nb/</span><span class="t-sym pf-tree-c">笔记本（.ipynb）的运行环境</span></div>
+            <div class="t-line"><span class="t-out">└─ python/</span><span class="t-sym pf-tree-c">← 自带的 Python 3.13（不用另装）</span></div>
+          </div>
+        </div>
+        <p class="pf-term-hint">想备份？把整个文件夹拷走即可。想换台机器继续？同上。<b>想彻底不留痕迹？删掉整个文件夹 —— 它不往系统里写任何东西。</b></p>
+      </div>
+    </section>
+
+    <!-- ===== 自带环境 ===== -->
+    <section class="pf-sec" id="env">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">自带的编程环境</span>
+          <h3 class="pf-h">插到"裸机"上也能跑代码</h3>
+          <p class="pf-lead">
+            便携版里塞了一份 <b>Python 3.13</b>。打开「环境」面板，解释器一行会显示<b>「便携」</b>——
+            意思是"用的是随盘自带的那个"。下面这些开箱就有：
+          </p>
+        </div>
+        <ul class="pf-notes rv" style="max-width:900px">
+          <li><b>数据三件套</b>：<code>numpy</code>、<code>pandas 2.3</code>、<code>matplotlib</code> —— 读数据、算表格、画图都能直接来。matplotlib 已配好 <b>中文字体</b>，标题写中文不会变成方框。</li>
+          <li><b>Excel 读写</b>：<code>openpyxl</code> —— 让脚本生成 / 修改 <code>.xlsx</code>，中文表头与内容都不出错。</li>
+          <li><b>联网取数</b>：<code>requests</code> —— 抓网页接口、下载文件。</li>
+          <li><b>还能自己装包</b>：代码档案的「⌨ 终端」里可以直接 <code>pip install</code>（包会装到这份档案自己的工作目录，跟着盘走），装完脚本里直接 <code>import</code>。</li>
+          <li><b>要用自己电脑上的 Python</b>：设置 → 解释器里填你自己的路径（比如装了 Anaconda）；<b>留空就用自带的</b>。注意设置里存的是绝对路径，换台电脑就失效 —— 那时会自动落回自带的那个，不会打不开。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 与安装版的区别 ===== -->
+    <section class="pf-sec" id="diff">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">怎么选</span>
+          <h3 class="pf-h">便携版与安装版，区别在哪</h3>
+          <p class="pf-lead">两个版本<b>功能完全一样</b>，是同一份代码打出来的；区别只在"装在哪、资料放哪、怎么更新"。</p>
+        </div>
+        <div class="pf-table-wrap rv">
+          <table class="pf-table">
+            <thead><tr><th></th><th>安装版（推荐日常用）</th><th>便携版（U 盘随身）</th></tr></thead>
+            <tbody>
+              <tr><th>安装</th><td>运行安装程序，装进系统</td><td class="y">免安装，解压即用</td></tr>
+              <tr><th>编程环境</th><td>用你电脑上的 Python / Node（没装就自己装一份）</td><td class="y">自带 Python 3.13 + 常用库，裸机可用</td></tr>
+              <tr><th>资料位置</th><td>你指定的目录（首次启动可选）</td><td class="y">就在程序旁边的 <code>data/</code></td></tr>
+              <tr><th>换电脑</th><td>拷资料目录，或重新安装</td><td class="y">整个文件夹拷过去，插上就用</td></tr>
+              <tr><th>自动更新</th><td class="y">有（打开软件提示新版本）</td><td class="n">没有 —— 升级就换一份新的便携包（资料不受影响）</td></tr>
+              <tr><th>系统残留</th><td>有安装记录，卸载可清</td><td class="y">零残留，删文件夹即可</td></tr>
+              <tr><th>启动速度</th><td class="y">硬盘/SSD，最快</td><td class="n">U 盘慢些，首次启动多等几秒</td></tr>
+              <tr><th>包体积</th><td>约 114 MB</td><td>约 212 MB（压缩包）/ 537 MB（解压后）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pf-alt">日常自己电脑上用，还是建议<a href="index.html#acquire">下载安装版</a>（有自动更新、启动更快）；便携版适合<b>机房、别人的电脑、多台机器之间来回跑、以及"不想在系统里留东西"</b>的场合。</p>
+      </div>
+    </section>
+
+    <!-- ===== 注意事项 ===== -->
+    <section class="pf-sec" id="note">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">用之前先知道这几条</span>
+          <h3 class="pf-h">注意事项</h3>
+        </div>
+        <ul class="pf-notes rv">
+          <li><b>盘符会变，这是正常的。</b>同一支 U 盘在这台电脑是 <code>E:</code>、换一台可能是 <code>F:</code>。程序里所有路径都相对自己算，不会因此打不开；但你<b>在系统里给别的软件指路径时</b>要留意。</li>
+          <li><b>别在程序运行时拔盘。</b>写资料写到一半拔掉可能损坏数据（和任何软件一样）。先退出程序，等 U 盘的指示灯不闪了再拔。</li>
+          <li><b>U 盘比硬盘慢。</b>第一次启动、第一次跑 pandas、第一次打开大表格都会慢几秒到十几秒；之后正常。若常年在固定电脑上用，把文件夹放在硬盘上会更舒服。</li>
+          <li><b>便携版不参与自动更新。</b>要升级就下载新的便携包，把它解压到新文件夹，再把<b>旧文件夹里的 <code>data</code> 拷过去覆盖</b>即可 —— 资料一条不丢。也可以先备份整个旧文件夹再替换。</li>
+          <li><b>不要删 <code>portable.txt</code>。</b>它是"我在便携模式"的标记；删掉后程序会退回安装版行为（把资料写进 C 盘的用户目录）。同理，<b>不要只考 exe 出来单独运行</b>。</li>
+          <li><b>U 盘写保护 / 只读介质</b>下程序能打开，但存不了资料 —— 那种介质请改用安装版。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 常见问题 ===== -->
+    <section class="pf-sec" id="faq">
+      <div class="wrap">
+        <div class="ch-head rv" style="max-width:none">
+          <span class="pf-sub">常 见 问 题</span>
+          <h3 class="pf-h">可能你还想问</h3>
+        </div>
+
+        <div class="get-card rv" style="padding-top:var(--sp-5)">
+          <span class="corner c1"></span><span class="corner c2"></span>
+          <span class="corner c3"></span><span class="corner c4"></span>
+
+          <details class="dl-ck" open>
+            <summary>便携版和安装版能同时装吗？资料会串吗？</summary>
+            <p class="dl-ck-desc">能同时存在，<b>资料各自独立、不会串</b>：安装版的资料在你指定的目录，便携版的资料在它自己的 <code>data</code> 里。想搬资料，把其中一个的 <code>data</code> 目录整体拷到另一个上覆盖即可。</p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>能不能把资料放到 U 盘之外（比如电脑硬盘上的某个目录）？</summary>
+            <p class="dl-ck-desc">
+              便携版的设计就是"资料在程序旁边"，这样插到哪台机器都是一套完整的东西。<b>如果想让程序在 U 盘、资料在硬盘</b>，可以用安装版并把资料目录指到硬盘上；或者反过来，把便携文件夹整个放在硬盘上、用 U 盘做备份（把整个文件夹拷回 U 盘即可）。
+            </p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>插到没有 Python 的电脑上，数据库工作台能用吗？</summary>
+            <p class="dl-ck-desc">能。SQLite 是程序内置的，直接可用；连 MySQL / PostgreSQL / SQL Server 只要求<b>网络通</b>，不要求那台电脑装数据库客户端。</p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>宏病毒 / 学校机房的安全策略会不会拦它？</summary>
+            <p class="dl-ck-desc">
+              文渊阁不写注册表、不装驱动、不请求管理员权限，通常不需要特殊放行。若机房的策略<b>禁止运行 U 盘程序</b>（不少单位会这么设），那就没法绕开 —— 那属于策略限制，不是软件的问题。这种情况下可以先在允许的机器上把资料整理好，或改用安装版。
+            </p>
+          </details>
+
+          <details class="dl-ck">
+            <summary>升级便携版，我的资料会不会丢？</summary>
+            <p class="dl-ck-desc">
+              不会。步骤是：① 下载新的便携包并解压到<b>新文件夹</b>；② 把旧文件夹里的 <code>data</code> 整个拷进新文件夹<b>覆盖</b>；③ 确认新的能打开、资料都在，再删旧的。<b>先别删旧的</b>，确认无误再删。
+            </p>
+          </details>
+        </div>
+
+        <p class="jr-back rv" style="justify-content:center;margin-top:var(--sp-5)">
+          <a href="#get" class="btn btn-seal">↑ 回到下载</a>
+          <a href="index.html" class="btn">← 回到首页</a>
+          <a href="feedback.html" class="btn">有问题 / 想提点建议 →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-in">
+      <a href="index.html" class="brand">
+        <span class="seal">渊</span>
+        <span class="brand-txt">
+          <span class="brand-cn">文渊阁</span>
+          <span class="brand-en">DocBase</span>
+        </span>
+      </a>
+      <ul class="foot-links">
+        <li><a href="index.html#volume">功能</a></li>
+        <li><a href="portable.html">便携版</a></li>
+        <li><a href="index.html#acquire">下载</a></li>
+        <li><a href="journal.html">更新手记</a></li>
+        <li><a href="feedback.html">反馈 / 提建议</a></li>
+        <li><a href="shots.html">界面一览</a></li>
+        <li><a href="https://github.com/lp000-l/docbase-site" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+      <p class="foot-copy">© 二〇二六年 文渊阁 DocBase · MIT 开源许可</p>
+    </div>
+    <p class="gh-mirror">本站为 GitHub Pages 镜像站，内容与正式站点同源。正式站点：<a href="https://bishe.xin/">bishe.xin</a></p>
+  </footer>
+
+  <script src="site.js"></script>
+  <script>
+    /* ===== 便携版清单（portable.json）回填 =====
+       打包流程每出一份便携包就会刷新它（sha256 / md5 / 体积 / 文件名）。
+       页面上的静态值只是"没有 JS 时的兜底"，权威值以清单为准 —— 与安装版那张表一个套路：
+       升版本时不会出现"链接是 1.7.1、标注还写着 1.7.2"这种对不上的情况。 */
+    (function () {
+      const MB = 1048576;
+      fetch('portable.json', { cache: 'no-store' }).then(r => r.json()).then(m => {
+        if (!m) return;
+        const meta = document.getElementById('pfMeta');
+        if (meta && m.version) {
+          meta.textContent = 'v' + m.version + ' · 64 位 · 压缩包约 '
+            + (m.size / MB).toFixed(1) + ' MB · 解压后约 536.6 MB';
+        }
+        const sizeZip = document.getElementById('pfSizeZip');
+        if (sizeZip && m.size) sizeZip.textContent = m.size.toLocaleString('en-US') + ' 字节（约 ' + (m.size / MB).toFixed(1) + ' MB）';
+        const body = document.getElementById('pfCkBody');
+        if (body && m.file && m.sha256) {
+          body.innerHTML = '<tr><td>' + m.file + '</td><td>' + (m.size / MB).toFixed(1) + ' MB</td>'
+            + '<td style="word-break:break-all">' + m.sha256 + '</td></tr>'
+            + '<tr><td colspan="3" style="font-family:var(--font-label);font-size:10.5px;color:var(--ink-3)">MD5：'
+            /* 这一行的 id 必须**留在重建出来的 HTML 里**：整张表是 innerHTML 换掉的，
+               之前先取好的引用会变成游离节点（往它写东西页面上看不到 —— 本地探针抓到的真事）。 */
+            + '<span id="pfMd5" style="word-break:break-all">' + m.md5 + '</span></td></tr>';
+        }
+        /* 下载按钮的 href 也跟着清单走（清单里的文件名是唯一出处）。
+           但**只改写"还是裸文件名"的那种**：镜像站上这个按钮指向的是绝对地址（GitHub Releases），
+           无脑按 m.file 覆盖会把绝对地址改回裸文件名 → 镜像站上一点就 404。
+           判据用 indexOf('://')，比 test 更直白：有协议头就说明不该动它。 */
+        const btn = document.querySelector('.dl-btn');
+        const cur = btn ? (btn.getAttribute('href') || '') : '';
+        if (btn && m.file && cur.indexOf('://') < 0 && cur !== m.file) btn.setAttribute('href', m.file);
+      }).catch(() => { /* 清单读不到就用静态兜底值，不打扰用户 */ });
+    })();
+  </script>
+</body>
+</html>
