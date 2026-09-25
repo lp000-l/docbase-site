@@ -1,0 +1,11 @@
+{
+  "product": "聚文坞",
+  "edition": "portable",
+  "version": "1.7.7",
+  "file": "FileDock-Portable-1.7.7.zip",
+  "size": 222923601,
+  "sha256": "8f985686b2c3bc91cbf00e18135d899759228bd0ba546e8d48a1872487ff3767",
+  "md5": "c35e0726729628f58bd830769da382d2",
+  "builtAt": "2026-09-25T05:23:24.461Z",
+  "note": "便携版（U 盘版）：免安装、自带 Python 环境、资料存在自己旁边的 data 目录"
+}
