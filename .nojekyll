@@ -1,0 +1,1 @@
+GitHub Pages：本文件让 Jekyll 不要处理这些文件（站点是纯静态 HTML，且目录里有 _ 开头的东西时 Jekyll 会跳过后再报错）。
