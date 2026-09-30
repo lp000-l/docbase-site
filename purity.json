@@ -1,0 +1,29 @@
+{
+  "product": "聚文坞",
+  "version": "1.9.0",
+  "buildId": "WYG-202609300834-2AE26B",
+  "builtAt": "2026-09-30T08:34:23.788Z",
+  "home": "https://bishe.xin",
+  "node": "v22.22.2",
+  "platform": "win32/x64",
+  "files": [
+    {
+      "name": "server.bundle.cjs",
+      "size": 10125274,
+      "sha256": "65f7693caec6b8c89fdf9ace948797a5d298f0b0c3a912b8986436bc5b971e78"
+    },
+    {
+      "name": "app.asar",
+      "size": 52631317,
+      "sha256": "4c1d612efab09f3b9b78cda7c9eea1c62cd2bdbf384146bacb42ba6bce68f1e1"
+    },
+    {
+      "name": "聚文坞-安装程序-v1.9.0.exe",
+      "size": 119937736,
+      "sha256": "8c727861a6d174112385943e781be290da0f4cb3e052a461550e842bc44e2851",
+      "md5": "03190989a020977d2910d204a193b456"
+    }
+  ],
+  "sign": null,
+  "fingerprint": "A1AD59EC375C749C"
+}
